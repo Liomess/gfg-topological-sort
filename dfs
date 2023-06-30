@@ -1,0 +1,15 @@
+class Solution:
+    def topoSort(self, v, adj):
+        def dfs(vis,stack,i,adj):
+            vis[i]=1
+            for val in adj[i]:
+                if vis[val]==0:
+                    dfs(vis,stack,val,adj)
+            stack.append(i)
+        vis=[0]*v
+        stack=[]
+        for i in range(v):
+            if vis[i]==0:
+                dfs(vis,stack,i,adj)
+        stack=stack[::-1]
+        return stack
