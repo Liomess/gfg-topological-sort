@@ -1,0 +1,20 @@
+from collections import deque
+class Solution:
+    def topoSort(self, v, adj):
+        ans=[]
+        indegree=[0]*v
+        for i in range(v):
+            for val in adj[i]:
+                indegree[val]+=1
+        q=deque()
+        for i in range(v):
+            if indegree[i]==0:
+                q.append(i)
+        while len(q)!=0:
+            node=q.popleft()
+            ans.append(node)
+            for val in adj[node]:
+                indegree[val]-=1
+                if indegree[val]==0:
+                    q.append(val)
+        return ans
